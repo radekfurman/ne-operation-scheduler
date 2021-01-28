@@ -1,5 +1,4 @@
 import {
-    Button,
     createStyles,
     makeStyles,
     Step,
@@ -9,8 +8,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/root';
 import { stepsConfig } from './stepsConfig';
 
@@ -30,13 +28,9 @@ const useStyles = makeStyles(() =>
 
 export const WizardNavigation: React.FunctionComponent<{}> = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const activeStep = useSelector((state: RootState) => {
         return state.wizardNavigation.activeStep;
     });
-
-    const onNextStepClicked = () => dispatch(setNextStep());
-    const onPreviousStepClicked = () => dispatch(setPreviousStep());
 
     return (
         <div className={classes.root}>
@@ -53,12 +47,6 @@ export const WizardNavigation: React.FunctionComponent<{}> = () => {
                     </Step>
                 ))}
             </Stepper>
-            <Button variant='contained' color='primary' onClick={onPreviousStepClicked}>
-                Back
-            </Button>
-            <Button variant='contained' color='primary' onClick={onNextStepClicked}>
-                Next
-            </Button>
         </div>
     );
 };
