@@ -8,7 +8,7 @@ interface LayoutProps {}
 
 export const Layout: React.FunctionComponent<LayoutProps> = () => {
     return (
-        <span className="Layout">
+        <span className='Layout'>
             <Topbar></Topbar>
             <WizardNavigation></WizardNavigation>
             <WizardView></WizardView>

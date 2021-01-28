@@ -1,22 +1,22 @@
 export enum WizardStepType {
-    NetworkElement = 1,
-    OperationType = 2,
-    Summary = 3
+    NetworkElement = 0,
+    OperationType = 1,
+    Summary = 2,
 }
 
 export interface WizardNavigationState {
-    activeStep: WizardStepType
+    activeStep: WizardStepType;
 }
 
-export const SET_NEXT_STEP = 'SET_NEXT_STEP'
-export const SET_PREVIOUS_STEP = 'SET_PREVIOUS_STEP'
+export const SET_NEXT_STEP = 'SET_NEXT_STEP';
+export const SET_PREVIOUS_STEP = 'SET_PREVIOUS_STEP';
 
 interface SetNextStepAction {
-  type: typeof SET_NEXT_STEP
+    type: typeof SET_NEXT_STEP;
 }
 
 interface SetPreviousStepAction {
-  type: typeof SET_PREVIOUS_STEP
+    type: typeof SET_PREVIOUS_STEP;
 }
 
-export type WizardNavigationActionTypes = SetNextStepAction | SetPreviousStepAction
+export type WizardNavigationActionTypes = SetNextStepAction | SetPreviousStepAction;

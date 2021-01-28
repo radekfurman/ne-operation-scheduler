@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import { createStore } from 'redux';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import wizardNavigationReducer from './store/reducer';
+import { rootReducer } from './store/reducers/root';
 
-const rootReducer = combineReducers({
-    wizardNavigation: wizardNavigationReducer,
-});
-
-const store = createStore(rootReducer);
-
+/* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
+const store = createStore(
+    rootReducer,
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
+);
+/* eslint-enable */
 ReactDOM.render(
-    <Provider store={ store }>
+    <Provider store={store}>
         <React.StrictMode>
             <App />
         </React.StrictMode>

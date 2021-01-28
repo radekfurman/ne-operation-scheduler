@@ -4,7 +4,7 @@ import {
     WizardNavigationActionTypes,
     WizardNavigationState,
     WizardStepType,
-} from './types';
+} from '../types';
 
 const initialState: WizardNavigationState = {
     activeStep: WizardStepType.NetworkElement,
