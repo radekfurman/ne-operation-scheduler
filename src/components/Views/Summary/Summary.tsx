@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Summary: React.FunctionComponent<{}> = () => {
-    return null;
+    return <div>Summary view</div>;
 };

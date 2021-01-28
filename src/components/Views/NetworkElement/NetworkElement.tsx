@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const NetworkElement: React.FunctionComponent<{}> = () => {
-    return null;
+    return <div>Network element view</div>;
 };
