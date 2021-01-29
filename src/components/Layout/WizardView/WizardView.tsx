@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
 import { RootState } from '../../../store/reducers/root';
-import { WizardStepType } from '../../../store/types';
+import { WizardStepType } from '../../../store/wizardNavigationTypes';
 import { NetworkElement } from '../../Views/NetworkElement/NetworkElement';
 import { OperationType } from '../../Views/OperationType/OperationType';
 import { Summary } from '../../Views/Summary/Summary';

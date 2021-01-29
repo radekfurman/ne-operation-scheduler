@@ -5,18 +5,35 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow
+    TableRow,
 } from '@material-ui/core';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    deselectNetworkElement,
+    selectNetworkElement,
+} from '../../../store/actions/networkElements';
+import { RootState } from '../../../store/reducers/root';
 import { networksElementTestData } from './networkElementsData';
 
 const useStyles = makeStyles({
-    root: {}
-
-  });
+    root: {},
+});
 
 export const NetworkElement: React.FunctionComponent<{}> = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const selectedIds = useSelector((state: RootState) => {
+        return state.networkElements.selectedIds;
+    });
+
+    const isSelected = (id: number) => {
+        return selectedIds.includes(id);
+    };
+    const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+        isSelected(id) ? dispatch(deselectNetworkElement(id)) : dispatch(selectNetworkElement(id));
+    };
+
     return (
         <TableContainer>
             <Table className={classes.root} aria-label='simple table' stickyHeader={true}>
@@ -29,7 +46,11 @@ export const NetworkElement: React.FunctionComponent<{}> = () => {
                 </TableHead>
                 <TableBody>
                     {networksElementTestData.map((networkElement) => (
-                        <TableRow key={networkElement.id}>
+                        <TableRow
+                            key={networkElement.id}
+                            onClick={(event) => handleClick(event, networkElement.id)}
+                            selected={isSelected(networkElement.id)}
+                        >
                             <TableCell component='th' scope='row'>
                                 {networkElement.ipAddress}
                             </TableCell>

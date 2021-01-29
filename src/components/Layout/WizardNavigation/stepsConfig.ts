@@ -1,4 +1,4 @@
-import { WizardStepType } from '../../../store/types';
+import { WizardStepType } from '../../../store/wizardNavigationTypes';
 
 export interface StepConfig {
     label: string;
