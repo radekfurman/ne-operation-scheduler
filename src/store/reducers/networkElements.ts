@@ -2,11 +2,13 @@ import {
     DESELECT_NETWORK_ELEMENT,
     NetworkElementsActionTypes,
     NetworkElementsState,
+    SEARCH_NETWORK_ELEMENT,
     SELECT_NETWORK_ELEMENT,
 } from '../networkElementsTypes';
 
 const initialState: NetworkElementsState = {
     selectedIds: [],
+    searchText: ''
 };
 
 const networkElementsReducer = (
@@ -26,6 +28,11 @@ const networkElementsReducer = (
                     ...state.selectedIds.filter((selectedId) => selectedId !== action.id),
                 ],
             };
+        case SEARCH_NETWORK_ELEMENT:
+            return {
+                ...state,
+                searchText: action.searchText
+            }
         default:
             return state;
     }

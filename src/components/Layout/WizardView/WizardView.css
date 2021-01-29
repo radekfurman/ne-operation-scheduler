@@ -4,11 +4,10 @@
 }
 
 .WizardView > :nth-child(1) {
-    height: 100%;
+    height: 90%;
 }
-
 .WizardView > :nth-child(2) {
-    height: 100px;
+    height: 10%;
 }
 
 .WizardView .ButtonContainer {

@@ -1,9 +1,11 @@
 export interface NetworkElementsState {
     selectedIds: number[];
+    searchText: string;
 }
 
 export const SELECT_NETWORK_ELEMENT = 'SELECT_NETWORK_ELEMENT';
 export const DESELECT_NETWORK_ELEMENT = 'DESELECT_NETWORK_ELEMENT';
+export const SEARCH_NETWORK_ELEMENT = 'SEARCH_NETWORK_ELEMENT';
 
 interface SelectNetworkElementAction {
     type: typeof SELECT_NETWORK_ELEMENT;
@@ -15,4 +17,9 @@ interface DeselectNetworkElementAction {
     id: number;
 }
 
-export type NetworkElementsActionTypes = SelectNetworkElementAction | DeselectNetworkElementAction;
+interface SearchNetworkElementAction {
+    type: typeof SEARCH_NETWORK_ELEMENT;
+    searchText: string;
+}
+
+export type NetworkElementsActionTypes = SelectNetworkElementAction | DeselectNetworkElementAction | SearchNetworkElementAction;
