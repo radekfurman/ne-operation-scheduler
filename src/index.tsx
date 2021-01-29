@@ -6,6 +6,18 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { rootReducer } from './store/reducers/root';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#0961BD', // This is an orange looking color
+        },
+        secondary: {
+            main: '#8EE6FF', //Another orange-ish color
+        },
+    }
+});
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
 const store = createStore(
@@ -16,7 +28,9 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App />
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
         </React.StrictMode>
     </Provider>,
 

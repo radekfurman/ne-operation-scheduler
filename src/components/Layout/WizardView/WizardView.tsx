@@ -7,12 +7,12 @@ import { WizardStepType } from '../../../store/wizardNavigationTypes';
 import { NetworkElement } from '../../Views/NetworkElement/NetworkElement';
 import { OperationType } from '../../Views/OperationType/OperationType';
 import { Summary } from '../../Views/Summary/Summary';
+import { navigationConfiguration } from './navigationPreconditions';
 import './WizardView.css';
 
 export const WizardView: React.FunctionComponent<{}> = () => {
-    const activeStep = useSelector((state: RootState) => {
-        return state.wizardNavigation.activeStep;
-    });
+    const state: RootState = useSelector((state: RootState) => state);
+
     const dispatch = useDispatch();
     const onNextStepClicked = () => dispatch(setNextStep());
     const onPreviousStepClicked = () => dispatch(setPreviousStep());
@@ -30,24 +30,34 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         }
     };
 
-    const isNextButtonDisabled = (viewType: WizardStepType) => {
-        return viewType === WizardStepType.Summary;
-    }
+    const isNextButtonDisabled = (state: RootState): boolean => {
+        return !navigationConfiguration[state.wizardNavigation.activeStep].canGoNext(state);
+    };
 
-    const isBackButtonDisabled = (viewType: WizardStepType) => {
-        return viewType === WizardStepType.NetworkElement;
-    }
+    const isBackButtonDisabled = (state: RootState): boolean => {
+        return !navigationConfiguration[state.wizardNavigation.activeStep].canGoBack(state);
+    };
 
     return (
         <div className='WizardView'>
-            {getView(activeStep)}
+            {getView(state.wizardNavigation.activeStep)}
             <div className='ButtonContainer'>
-                <Button disabled={isBackButtonDisabled(activeStep)} variant='contained' color='primary' onClick={onPreviousStepClicked}>
+                <Button
+                    disabled={isBackButtonDisabled(state)}
+                    variant='contained'
+                    color='primary'
+                    onClick={onPreviousStepClicked}
+                >
                     Back
                 </Button>
-                <Button disabled={isNextButtonDisabled(activeStep)} variant='contained' color='primary' onClick={onNextStepClicked}>
+                <Button
+                    disabled={isNextButtonDisabled(state)}
+                    variant='contained'
+                    color='primary'
+                    onClick={onNextStepClicked}
+                >
                     Next
-            </Button>
+                </Button>
             </div>
         </div>
     );
