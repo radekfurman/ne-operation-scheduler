@@ -11,11 +11,26 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#0961BD', // This is an orange looking color
+            light: '#00C9FF',
+            main: '#0961BD',
+            dark: '#00C9FF',
         },
+        // secondary: {
+        //     light: '#0961BD',
+        //     main: '#00C9FF',
+        //     dark: '#124191',
+        // },
         secondary: {
-            main: '#8EE6FF', //Another orange-ish color
+            light: '#EDF2F5',
+            main: '#BEC8D2',
+            dark: '#98A2AE',
         },
+        action: {
+            active: '#00A1CC',
+            hover: '#8EE6FF',
+            selected: '#31C4F3',
+            focus: '00A1CC'
+        }
     }
 });
 

@@ -22,7 +22,7 @@ const navigationConfiguration: NavigationConfiguration = {
     },
     [WizardStepType.OperationType]: {
         canGoNext: (state: RootState): boolean => {
-            return true;
+            return !!state.operationView.selectedOperation;
         },
         canGoBack: (state: RootState): boolean => {
             return true;

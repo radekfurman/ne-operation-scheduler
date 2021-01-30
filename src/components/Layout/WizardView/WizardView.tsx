@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
 import { RootState } from '../../../store/reducers/root';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
-import { NetworkElement } from '../../Views/NetworkElement/NetworkElement';
-import { OperationType } from '../../Views/OperationType/OperationType';
-import { Summary } from '../../Views/Summary/Summary';
+import { NetworkElementView } from '../../Views/NetworkElement/NetworkElementView';
+import { OperationsView } from '../../Views/OperationType/OperationView';
+import { SummaryView } from '../../Views/Summary/SummaryView';
 import { navigationConfiguration } from './navigationPreconditions';
 import './WizardView.css';
 
@@ -20,11 +20,11 @@ export const WizardView: React.FunctionComponent<{}> = () => {
     const getView = (viewType: WizardStepType): JSX.Element => {
         switch (viewType) {
             case WizardStepType.NetworkElement:
-                return <NetworkElement></NetworkElement>;
+                return <NetworkElementView></NetworkElementView>;
             case WizardStepType.OperationType:
-                return <OperationType></OperationType>;
+                return <OperationsView></OperationsView>;
             case WizardStepType.Summary:
-                return <Summary></Summary>;
+                return <SummaryView></SummaryView>;
             default:
                 return <div>Empty view</div>;
         }

@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Summary: React.FunctionComponent<{}> = () => {
+export const SummaryView: React.FunctionComponent<{}> = () => {
     return <div>Summary view</div>;
 };

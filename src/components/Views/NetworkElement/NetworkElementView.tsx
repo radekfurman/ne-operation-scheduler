@@ -6,6 +6,7 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    useTheme,
 } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,14 +17,19 @@ import {
 } from '../../../store/actions/networkElements';
 import { RootState } from '../../../store/reducers/root';
 import { networksElementTestData } from './networkElementsData';
-import './NetworkElement.css';
+import './NetworkElementView.css';
 import { SearchInput } from '../../UI/SearchInput';
 
-const useStyles = makeStyles({
-    root: {},
-});
-
-export const NetworkElement: React.FunctionComponent<{}> = () => {
+export const NetworkElementView: React.FunctionComponent<{}> = () => {
+    const theme = useTheme();
+    const useStyles = makeStyles({
+        root: {},
+        tableRow: {
+            '&.MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover': {
+                backgroundColor: theme.palette.action.selected
+            }
+        }
+    });
     const classes = useStyles();
     const dispatch = useDispatch();
     const selectedIds = useSelector((state: RootState) => {
@@ -52,7 +58,7 @@ export const NetworkElement: React.FunctionComponent<{}> = () => {
     })
 
     return (
-        <div className='NetworkElement'>
+        <div className='NetworkElementView'>
             <SearchInput
                 className='SearchInput'
                 value={searchText}
@@ -61,7 +67,7 @@ export const NetworkElement: React.FunctionComponent<{}> = () => {
             <TableContainer>
                 <Table className={classes.root} aria-label='simple table' stickyHeader={true}>
                     <TableHead>
-                        <TableRow>
+                        <TableRow >
                             <TableCell align='left'>IP Address</TableCell>
                             <TableCell align='left'>Type</TableCell>
                             <TableCell align='left'>DN</TableCell>
@@ -71,8 +77,10 @@ export const NetworkElement: React.FunctionComponent<{}> = () => {
                         {filteredNEs.map((networkElement) => (
                             <TableRow
                                 key={networkElement.id}
+                                className={classes.tableRow}
                                 onClick={(event) => handleClick(event, networkElement.id)}
                                 selected={isSelected(networkElement.id)}
+                                hover={true}
                             >
                                 <TableCell component='th' scope='row'>
                                     {networkElement.ipAddress}
