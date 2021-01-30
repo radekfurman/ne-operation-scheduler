@@ -1,4 +1,4 @@
-import { OperationViewActionTypes, OperationViewState, SET_OPERATION } from "../operationViewTypes";
+import { OperationViewActionTypes, OperationViewState, RESTORE_OPERATION, SET_OPERATION } from "../operationViewTypes";
 
 const initialState: OperationViewState = {
     selectedOperation: undefined
@@ -14,6 +14,10 @@ const operationViewReducer = (
                 ...state,
                 selectedOperation: action.selectedOperation,
             };
+        case RESTORE_OPERATION:
+            return {
+                ...initialState
+            }
         default:
             return state;
     }

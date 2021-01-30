@@ -1,4 +1,4 @@
-import { SET_NEXT_STEP, SET_PREVIOUS_STEP, WizardNavigationActionTypes } from '../wizardNavigationTypes';
+import { RESTORE_NAVIGATION, SET_NEXT_STEP, SET_PREVIOUS_STEP, WizardNavigationActionTypes } from '../wizardNavigationTypes';
 
 export const setNextStep = (): WizardNavigationActionTypes => {
     return {
@@ -9,5 +9,11 @@ export const setNextStep = (): WizardNavigationActionTypes => {
 export const setPreviousStep = (): WizardNavigationActionTypes => {
     return {
         type: SET_PREVIOUS_STEP,
+    };
+};
+
+export const restoreNavigation = (): WizardNavigationActionTypes => {
+    return {
+        type: RESTORE_NAVIGATION,
     };
 };

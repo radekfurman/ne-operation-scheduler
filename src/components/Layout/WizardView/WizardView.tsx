@@ -1,7 +1,9 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
+import { restoreNetworkElement } from '../../../store/actions/networkElements';
+import { restoreOperation } from '../../../store/actions/operationView';
+import { restoreNavigation, setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
 import { RootState } from '../../../store/reducers/root';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
 import { NetworkElementView } from '../../Views/NetworkElement/NetworkElementView';
@@ -16,6 +18,11 @@ export const WizardView: React.FunctionComponent<{}> = () => {
     const dispatch = useDispatch();
     const onNextStepClicked = () => dispatch(setNextStep());
     const onPreviousStepClicked = () => dispatch(setPreviousStep());
+    const onCancelButtonClicked = () => {
+        dispatch(restoreOperation());
+        dispatch(restoreNetworkElement());
+        dispatch(restoreNavigation());
+    }
 
     const getView = (viewType: WizardStepType): JSX.Element => {
         switch (viewType) {
@@ -30,6 +37,10 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         }
     };
 
+    const isCancelButtonDisabled = (state: RootState): boolean => {
+        return !navigationConfiguration[state.wizardNavigation.activeStep].canCancel(state);
+    };
+
     const isNextButtonDisabled = (state: RootState): boolean => {
         return !navigationConfiguration[state.wizardNavigation.activeStep].canGoNext(state);
     };
@@ -42,6 +53,14 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         <div className='WizardView'>
             {getView(state.wizardNavigation.activeStep)}
             <div className='ButtonContainer'>
+                <Button
+                    disabled={isCancelButtonDisabled(state)}
+                    variant='contained'
+                    color='primary'
+                    onClick={onCancelButtonClicked}
+                >
+                    Cancel
+                </Button>
                 <Button
                     disabled={isBackButtonDisabled(state)}
                     variant='contained'

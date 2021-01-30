@@ -2,6 +2,7 @@ import { RootState } from '../../../store/reducers/root';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
 
 export interface NavigationPrecondition {
+    canCancel: (state: RootState) => boolean;
     canGoNext: (state: RootState) => boolean;
     canGoBack: (state: RootState) => boolean;
 }
@@ -13,6 +14,9 @@ export type NavigationConfiguration = {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const navigationConfiguration: NavigationConfiguration = {
     [WizardStepType.NetworkElement]: {
+        canCancel: (state: RootState): boolean => {
+            return state.networkElements.selectedIds.length > 0;
+        },
         canGoNext: (state: RootState): boolean => {
             return state.networkElements.selectedIds.length > 0;
         },
@@ -21,6 +25,9 @@ const navigationConfiguration: NavigationConfiguration = {
         },
     },
     [WizardStepType.OperationType]: {
+        canCancel: (state: RootState): boolean => {
+            return state.networkElements.selectedIds.length > 0;
+        },
         canGoNext: (state: RootState): boolean => {
             return !!state.operationView.selectedOperation;
         },
@@ -29,6 +36,9 @@ const navigationConfiguration: NavigationConfiguration = {
         },
     },
     [WizardStepType.Summary]: {
+        canCancel: (state: RootState): boolean => {
+            return state.networkElements.selectedIds.length > 0;
+        },
         canGoNext: (state: RootState): boolean => {
             return false;
         },

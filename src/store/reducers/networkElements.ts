@@ -2,6 +2,7 @@ import {
     DESELECT_NETWORK_ELEMENT,
     NetworkElementsActionTypes,
     NetworkElementsState,
+    RESTORE_NETWORK_ELEMENT,
     SEARCH_NETWORK_ELEMENT,
     SELECT_NETWORK_ELEMENT,
 } from '../networkElementsTypes';
@@ -32,6 +33,10 @@ const networkElementsReducer = (
             return {
                 ...state,
                 searchText: action.searchText
+            }
+        case RESTORE_NETWORK_ELEMENT:
+            return {
+                ...initialState
             }
         default:
             return state;

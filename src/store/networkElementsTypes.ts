@@ -6,6 +6,7 @@ export interface NetworkElementsState {
 export const SELECT_NETWORK_ELEMENT = 'SELECT_NETWORK_ELEMENT';
 export const DESELECT_NETWORK_ELEMENT = 'DESELECT_NETWORK_ELEMENT';
 export const SEARCH_NETWORK_ELEMENT = 'SEARCH_NETWORK_ELEMENT';
+export const RESTORE_NETWORK_ELEMENT = 'RESTORE_NETWORK_ELEMENT';
 
 interface SelectNetworkElementAction {
     type: typeof SELECT_NETWORK_ELEMENT;
@@ -22,4 +23,8 @@ interface SearchNetworkElementAction {
     searchText: string;
 }
 
-export type NetworkElementsActionTypes = SelectNetworkElementAction | DeselectNetworkElementAction | SearchNetworkElementAction;
+interface RestoreNetworkElementAction {
+    type: typeof RESTORE_NETWORK_ELEMENT;
+}
+
+export type NetworkElementsActionTypes = SelectNetworkElementAction | DeselectNetworkElementAction | SearchNetworkElementAction | RestoreNetworkElementAction;

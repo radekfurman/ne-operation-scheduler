@@ -19,6 +19,6 @@
 
 }
 
-.WizardView .ButtonContainer > :nth-child(1) {
+.WizardView .ButtonContainer > * {
     margin-right: 10px;
 }

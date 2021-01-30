@@ -1,4 +1,5 @@
 import {
+    RESTORE_NAVIGATION,
     SET_NEXT_STEP,
     SET_PREVIOUS_STEP,
     WizardNavigationActionTypes,
@@ -25,6 +26,10 @@ const wizardNavigationReducer = (
                 ...state,
                 activeStep: state.activeStep - 1,
             };
+        case RESTORE_NAVIGATION:
+            return {
+                ...initialState
+            }
         default:
             return state;
     }
