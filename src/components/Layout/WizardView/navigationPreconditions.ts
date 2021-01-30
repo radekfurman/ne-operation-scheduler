@@ -5,6 +5,7 @@ export interface NavigationPrecondition {
     canCancel: (state: RootState) => boolean;
     canGoNext: (state: RootState) => boolean;
     canGoBack: (state: RootState) => boolean;
+    canSchedule: (state: RootState) => boolean;
 }
 
 export type NavigationConfiguration = {
@@ -20,9 +21,8 @@ const navigationConfiguration: NavigationConfiguration = {
         canGoNext: (state: RootState): boolean => {
             return state.networkElements.selectedIds.length > 0;
         },
-        canGoBack: (state: RootState): boolean => {
-            return false;
-        },
+        canGoBack: (state: RootState): boolean => false,
+        canSchedule: (state: RootState): boolean => false
     },
     [WizardStepType.OperationType]: {
         canCancel: (state: RootState): boolean => {
@@ -31,20 +31,16 @@ const navigationConfiguration: NavigationConfiguration = {
         canGoNext: (state: RootState): boolean => {
             return !!state.operationView.selectedOperation;
         },
-        canGoBack: (state: RootState): boolean => {
-            return true;
-        },
+        canGoBack: (state: RootState): boolean => true,
+        canSchedule: (state: RootState): boolean => false
     },
     [WizardStepType.Summary]: {
         canCancel: (state: RootState): boolean => {
             return state.networkElements.selectedIds.length > 0;
         },
-        canGoNext: (state: RootState): boolean => {
-            return false;
-        },
-        canGoBack: (state: RootState): boolean => {
-            return true;
-        },
+        canGoNext: (state: RootState): boolean => false,
+        canGoBack: (state: RootState): boolean => true,
+        canSchedule: (state: RootState): boolean => true
     },
 };
 /* eslint-enable */

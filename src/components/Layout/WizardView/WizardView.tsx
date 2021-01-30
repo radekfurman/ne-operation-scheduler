@@ -3,7 +3,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { restoreNetworkElement } from '../../../store/actions/networkElements';
 import { restoreOperation } from '../../../store/actions/operationView';
-import { restoreNavigation, setNextStep, setPreviousStep } from '../../../store/actions/wizardNavigation';
+import {
+    restoreNavigation,
+    setNextStep,
+    setPreviousStep,
+} from '../../../store/actions/wizardNavigation';
 import { RootState } from '../../../store/reducers/root';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
 import { NetworkElementView } from '../../Views/NetworkElement/NetworkElementView';
@@ -22,7 +26,10 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         dispatch(restoreOperation());
         dispatch(restoreNetworkElement());
         dispatch(restoreNavigation());
-    }
+    };
+    const onScheduleButtonClicked = () => {
+        console.log('SCHEDULED!');
+    };
 
     const getView = (viewType: WizardStepType): JSX.Element => {
         switch (viewType) {
@@ -49,6 +56,10 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         return !navigationConfiguration[state.wizardNavigation.activeStep].canGoBack(state);
     };
 
+    const isScheduleButtonVisible = (state: RootState): boolean => {
+        return navigationConfiguration[state.wizardNavigation.activeStep].canSchedule(state);
+    };
+
     return (
         <div className='WizardView'>
             {getView(state.wizardNavigation.activeStep)}
@@ -69,14 +80,20 @@ export const WizardView: React.FunctionComponent<{}> = () => {
                 >
                     Back
                 </Button>
-                <Button
-                    disabled={isNextButtonDisabled(state)}
-                    variant='contained'
-                    color='primary'
-                    onClick={onNextStepClicked}
-                >
-                    Next
-                </Button>
+                {isScheduleButtonVisible(state) ? (
+                    <Button variant='contained' color='primary' onClick={onScheduleButtonClicked}>
+                        SCHEDULE
+                    </Button>
+                ) : (
+                    <Button
+                        disabled={isNextButtonDisabled(state)}
+                        variant='contained'
+                        color='primary'
+                        onClick={onNextStepClicked}
+                    >
+                        CONTINUE
+                    </Button>
+                )}
             </div>
         </div>
     );
