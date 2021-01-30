@@ -28,8 +28,9 @@ export const NetworkElementsSummary: React.FunctionComponent<NetworkElementsSumm
                 <TableHead>
                     <TableRow>
                         <TableCell align='left'>IP Address</TableCell>
-                        <TableCell align='left'>Type</TableCell>
-                        <TableCell align='left'>DN</TableCell>
+                        <TableCell align='left'>NE name</TableCell>
+                        <TableCell align='left'>Technology</TableCell>
+                        <TableCell align='left'>SW Version</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -38,8 +39,9 @@ export const NetworkElementsSummary: React.FunctionComponent<NetworkElementsSumm
                             <TableCell component='th' scope='row'>
                                 {networkElement.ipAddress}
                             </TableCell>
-                            <TableCell align='left'>{networkElement.type}</TableCell>
-                            <TableCell align='left'>{networkElement.distName}</TableCell>
+                            <TableCell align='left'>{networkElement.name}</TableCell>
+                            <TableCell align='left'>{networkElement.technology}</TableCell>
+                            <TableCell align='left'>{networkElement.swVersion}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
