@@ -30,6 +30,7 @@ export const WizardView: React.FunctionComponent<{}> = () => {
     const selectedNEs = networksElementTestData.filter((networkElement) => {
         return selectedNEIds.includes(networkElement.id);
     });
+
     const dispatch = useDispatch();
     const onNextStepClicked = () => dispatch(setNextStep());
     const onPreviousStepClicked = () => dispatch(setPreviousStep());
