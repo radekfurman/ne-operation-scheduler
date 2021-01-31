@@ -61,7 +61,7 @@ export const OperationsView: React.FunctionComponent<{}> = () => {
     return (
         <div className='OperationView'>
             {operations.map((operation) => (
-                <Card key={operation.type} className={classes.root} variant='outlined'>
+                <Card key={operation.type} className={classes.root} variant='elevation'>
                     <ToggleButton
                         className={classes.cardAction}
                         onClick={() => handleOperationClick(operation.type)}

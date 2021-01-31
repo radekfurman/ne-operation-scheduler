@@ -34,7 +34,6 @@ export const WizardNavigation: React.FunctionComponent<{}> = () => {
 
     return (
         <div className={classes.root}>
-            <div>My wizard navigation:</div>
             <Stepper activeStep={activeStep} orientation='vertical'>
                 {Object.values(stepsConfig).map((stepConfig) => (
                     <Step expanded={true} key={stepConfig.label}>
