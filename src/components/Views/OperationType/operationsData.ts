@@ -1,6 +1,6 @@
 export enum OperationType {
-    Update = 1,
-    Downgrade = 2,
+    Update = 'UpdateSoftware',
+    Downgrade = 'DowngradeSoftware',
 }
 
 export interface OperationData {

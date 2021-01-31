@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { rootReducer } from './store/reducers/root';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import thunk from 'redux-thunk';
 
 const theme = createMuiTheme({
     palette: {
@@ -29,17 +30,17 @@ const theme = createMuiTheme({
             active: '#00A1CC',
             hover: '#8EE6FF',
             selected: '#31C4F3',
-            focus: '00A1CC'
-        }
-    }
+            focus: '00A1CC',
+        },
+    },
 });
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
-const store = createStore(
-    rootReducer,
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>

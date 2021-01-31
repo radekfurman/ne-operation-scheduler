@@ -1,4 +1,5 @@
 import { RootState } from '../../../store/reducers/root';
+import { Status } from '../../../store/scheduleTypes';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
 
 export interface NavigationPrecondition {
@@ -40,7 +41,9 @@ const navigationConfiguration: NavigationConfiguration = {
         },
         canGoNext: (state: RootState): boolean => false,
         canGoBack: (state: RootState): boolean => true,
-        canSchedule: (state: RootState): boolean => true
+        canSchedule: (state: RootState): boolean => {
+            return state.scheduleRequest.status === Status.init;
+        }
     },
 };
 /* eslint-enable */

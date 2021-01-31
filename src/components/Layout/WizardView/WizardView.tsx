@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { restoreNetworkElement } from '../../../store/actions/networkElements';
 import { restoreOperation } from '../../../store/actions/operationView';
+import { schedule } from '../../../store/actions/schedule';
 import {
     restoreNavigation,
     setNextStep,
@@ -10,7 +11,9 @@ import {
 } from '../../../store/actions/wizardNavigation';
 import { RootState } from '../../../store/reducers/root';
 import { WizardStepType } from '../../../store/wizardNavigationTypes';
+import { networksElementTestData } from '../../Views/NetworkElement/networkElementsData';
 import { NetworkElementView } from '../../Views/NetworkElement/NetworkElementView';
+import { OperationType } from '../../Views/OperationType/operationsData';
 import { OperationsView } from '../../Views/OperationType/OperationView';
 import { SummaryView } from '../../Views/Summary/SummaryView';
 import { navigationConfiguration } from './navigationPreconditions';
@@ -18,7 +21,15 @@ import './WizardView.css';
 
 export const WizardView: React.FunctionComponent<{}> = () => {
     const state: RootState = useSelector((state: RootState) => state);
-
+    const selectedNEIds = useSelector((state: RootState) => {
+        return state.networkElements.selectedIds;
+    });
+    const selectedOperation = useSelector((state: RootState) => {
+        return state.operationView.selectedOperation;
+    });
+    const selectedNEs = networksElementTestData.filter((networkElement) => {
+        return selectedNEIds.includes(networkElement.id);
+    });
     const dispatch = useDispatch();
     const onNextStepClicked = () => dispatch(setNextStep());
     const onPreviousStepClicked = () => dispatch(setPreviousStep());
@@ -28,7 +39,7 @@ export const WizardView: React.FunctionComponent<{}> = () => {
         dispatch(restoreNavigation());
     };
     const onScheduleButtonClicked = () => {
-        console.log('SCHEDULED!');
+        dispatch(schedule(selectedNEs, selectedOperation as OperationType));
     };
 
     const getView = (viewType: WizardStepType): JSX.Element => {
@@ -57,7 +68,11 @@ export const WizardView: React.FunctionComponent<{}> = () => {
     };
 
     const isScheduleButtonVisible = (state: RootState): boolean => {
-        return navigationConfiguration[state.wizardNavigation.activeStep].canSchedule(state);
+        return state.wizardNavigation.activeStep === WizardStepType.Summary;
+    };
+
+    const isScheduleButtonDisabled = (state: RootState): boolean => {
+        return !navigationConfiguration[state.wizardNavigation.activeStep].canSchedule(state);
     };
 
     return (
@@ -81,7 +96,12 @@ export const WizardView: React.FunctionComponent<{}> = () => {
                     Back
                 </Button>
                 {isScheduleButtonVisible(state) ? (
-                    <Button variant='contained' color='primary' onClick={onScheduleButtonClicked}>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={onScheduleButtonClicked}
+                        disabled={isScheduleButtonDisabled(state)}
+                    >
                         SCHEDULE
                     </Button>
                 ) : (
